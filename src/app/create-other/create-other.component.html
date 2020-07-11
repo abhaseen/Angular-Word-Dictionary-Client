@@ -1,0 +1,90 @@
+<div class="container" *ngIf="termEnglish">
+  <h2>
+    Create a new translation for <em>{{ termEnglish.wordEnglish }}</em>
+  </h2>
+  <p>Enter the required data then click/tap the Save button.</p>
+  <form [formGroup]="createTermOtherForm">
+    <div class="form-group" *ngIf="languages">
+      <label for="languageCode">Language Code:</label>
+      <select
+        class="form-control"
+        id="languageCode"
+        required
+        formControlName="languageCode"
+      >
+        <option *ngFor="let lang of languages" [ngValue]="lang.code">
+          {{ lang.name }}
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="authorName">Author name:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="authorName"
+        placeholder="John Smith"
+        required
+        formControlName="authorName"
+      />
+    </div>
+    <div class="form-group">
+      <label for="wordNonEnglish">Term or word:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="wordNonEnglish"
+        placeholder="API"
+        required
+        formControlName="wordNonEnglish"
+      />
+    </div>
+    <div class="form-group">
+      <label for="wordExpanded">
+        Expansion, if term or word (above) is an acronym or initialism:
+      </label>
+      <input
+        type="text"
+        class="form-control"
+        id="wordExpanded"
+        placeholder="Application Programming Interface"
+        formControlName="wordExpanded"
+      />
+    </div>
+    <div class="form-group">
+      <label for="fieldOfStudy">Field of study:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="fieldOfStudy"
+        placeholder="Computer Science"
+        required
+        formControlName="fieldOfStudy"
+      />
+    </div>
+    <div class="form-group">
+      <label for="definition">Definition:</label>
+      <textarea
+        class="form-control"
+        id="definition"
+        rows="3"
+        required
+        formControlName="definition"
+      ></textarea>
+    </div>
+
+    <button
+      class="btn btn-primary"
+      [disabled]="!createTermOtherForm.valid"
+      (click)="onSaveClick()"
+    >
+      Save
+    </button>
+    <span>&nbsp;</span>
+    <a
+      routerLink="/termsEnglish/detail/{{ termEnglishId }}"
+      class="btn btn-outline-primary"
+      >Back to Details</a
+    >
+  </form>
+</div>

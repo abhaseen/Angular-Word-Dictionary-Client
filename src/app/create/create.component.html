@@ -1,0 +1,70 @@
+<div class="container">
+  <h2>Create a new English term</h2>
+  <p>Enter the required data then click/tap the Save button.</p>
+  <form [formGroup]="createTermForm">
+    <div class="form-group">
+      <label for="authorName">Author name:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="authorName"
+        placeholder="John Smith"
+        required
+        formControlName="authorName"
+      />
+    </div>
+    <div class="form-group">
+      <label for="wordEnglish">Term or word in English:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="wordEnglish"
+        placeholder="API"
+        required
+        formControlName="wordEnglish"
+      />
+    </div>
+    <div class="form-group">
+      <label for="wordExpanded">
+        Expansion, if term or word (above) is an acronym or initialism:
+      </label>
+      <input
+        type="text"
+        class="form-control"
+        id="wordExpanded"
+        placeholder="Application Programming Interface"
+        formControlName="wordExpanded"
+      />
+    </div>
+    <div class="form-group">
+      <label for="fieldOfStudy">Field of study:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="fieldOfStudy"
+        placeholder="Computer Science"
+        required
+        formControlName="fieldOfStudy"
+      />
+    </div>
+    <div class="form-group">
+      <label for="definition">Definition:</label>
+      <textarea
+        class="form-control"
+        id="definition"
+        rows="3"
+        required
+        formControlName="definition"
+      ></textarea>
+    </div>
+    <button
+      class="btn btn-primary"
+      [disabled]="!createTermForm.valid"
+      (click)="onSaveClick()"
+    >
+      Save
+    </button>
+    <span>&nbsp;</span>
+    <a routerLink="/home" class="btn btn-outline-primary">Back to list</a>
+  </form>
+</div>

@@ -1,0 +1,45 @@
+<div class="container-fluid table-responsive">
+  <a class="btn btn-primary mb-4" routerLink="/termsEnglish/create"
+    >Create New Term</a
+  >
+  <table class="table table-striped" *ngIf="termEnglish">
+    <thead>
+      <tr>
+        <th scope="col">Word</th>
+        <th scope="col">Author</th>
+        <th scope="col">Definition</th>
+        <th scope="col">Field of Study</th>
+        <th scope="col"><span class="sr-only">Detail</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let term of termEnglish">
+        <th scope="row">{{ term.wordEnglish }}</th>
+        <td>{{ term.authorName }}</td>
+        <td>
+          {{ term.definitions[0].definition }}
+          <ul>
+            <li *ngIf="term.definitions.length - 1 === 1">
+              {{ term.definitions.length - 1 }} other definition
+            </li>
+            <li *ngIf="term.definitions.length - 1 > 1">
+              {{ term.definitions.length - 1 }} other definitions
+            </li>
+          </ul>
+        </td>
+        <td>{{ term.fieldOfStudy }}</td>
+        <td>
+          <a
+            type="button"
+            class="btn btn-primary"
+            routerLink="/termsEnglish/detail/{{ term._id }}"
+          >
+            Detail
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="!termEnglish">Data is loading...</div>
+  <div *ngIf="termEnglish && termEnglish.length <= 0">No data to display.</div>
+</div>

@@ -1,0 +1,113 @@
+<div class="container" *ngIf="termEnglish">
+  <h2>English Term Details for {{ termEnglish.wordEnglish }}</h2>
+  <dl class="row">
+    <dt class="col-md-4">
+      Definitions<br />( {{ termEnglish.definitions.length }} )<br /><br />
+      <a
+        class="btn btn-primary btn-sm"
+        routerLink="/termsEnglish/add-definition/{{ termEnglish._id }}"
+      >
+        Add another
+      </a>
+    </dt>
+    <dd class="col-md-8">
+      <div class="row row-cols-1">
+        <div class="col mb-4" *ngFor="let def of termEnglish.definitions">
+          <div class="card">
+            <div class="card-header">
+              <app-like-button
+                [likes]="def.likes"
+                [termId]="termEnglish._id"
+                [defId]="def._id"
+              ></app-like-button>
+              &nbsp; Author: {{ def.authorName }} on
+              {{ def.dateCreated }}
+            </div>
+            <div class="card-body">
+              {{ def.definition }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+    </dd>
+
+    <dt class="col-md-4">Field of study</dt>
+    <dd class="col-md-8">
+      <p>{{ termEnglish.fieldOfStudy }}</p>
+    </dd>
+
+    <dt class="col-md-4">Author name</dt>
+    <dd class="col-md-8">
+      <p>{{ termEnglish.authorName }}</p>
+    </dd>
+
+    <dt class="col-md-4">Dates</dt>
+    <dd class="col-md-8">
+      <p>Created {{ termEnglish.dateCreated }}</p>
+      <p>Revised {{ termEnglish.dateRevised }}</p>
+    </dd>
+
+    <br />
+
+    <dt class="col-md-4">Translations</dt>
+    <dd class="col-md-8">
+      <span>
+        <a
+          class="btn btn-primary btn-sm"
+          routerLink="/termsOther/create/{{ termEnglish._id }}"
+        >
+          Add translation
+        </a>
+        <span>&nbsp;</span>
+        <app-translation-link
+          *ngFor="let term of translationTerms"
+          [nonEnglishTermId]="term._id"
+          [langCode]="term.languageCode"
+        ></app-translation-link>
+      </span>
+    </dd>
+
+    <dt class="col-md-4">Links</dt>
+    <dd class="col-md-8">
+      <span>
+        <a
+          class="btn btn-outline-primary btn-sm"
+          href="{{ termEnglish.linkAuthoritative }}"
+          [class.disabled]="!termEnglish.linkAuthoritative"
+        >
+          Authoritative
+        </a>
+      </span>
+      &nbsp;
+      <span>
+        <a
+          class="btn btn-outline-primary btn-sm"
+          href="{{ termEnglish.linkWikipedia }}"
+          [class.disabled]="!termEnglish.linkWikipedia"
+        >
+          Wikipedia
+        </a>
+      </span>
+      &nbsp;
+      <span>
+        <a
+          class="btn btn-outline-primary btn-sm"
+          href="{{ termEnglish.linkYouTube }}"
+          [class.disabled]="!termEnglish.linkYouTube"
+        >
+          YouTube
+        </a>
+      </span>
+    </dd>
+
+    <dt class="col-md-4">Was this helpful?</dt>
+    <dd class="col-md-8">
+      <app-helpful-buttons
+        [yesCount]="termEnglish.helpYes"
+        [noCount]="termEnglish.helpNo"
+        [termId]="termEnglish._id"
+      ></app-helpful-buttons>
+    </dd>
+  </dl>
+</div>

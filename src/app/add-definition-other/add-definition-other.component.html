@@ -1,0 +1,78 @@
+<div class="container" *ngIf="termNonEnglish && languages">
+  <h2>
+    Add a New Definition for {{ termNonEnglish.wordNonEnglish }} ({{
+      langName
+    }})
+  </h2>
+  <dl class="row">
+    <dt class="col-md-4">New Definition</dt>
+    <dd class="col-md-8">
+      <p>Enter the required data then click/tap the Save button.</p>
+      <form [formGroup]="addDefinitionOtherForm">
+        <div class="form-group">
+          <label for="authorName">Author name:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="authorName"
+            placeholder="John Smith"
+            formControlName="authorName"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="definition">Definition:</label>
+          <textarea
+            class="form-control"
+            id="definition"
+            rows="3"
+            formControlName="definition"
+            required
+          ></textarea>
+        </div>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="!addDefinitionOtherForm.valid"
+          (click)="onSaveClick()"
+        >
+          Save
+        </button>
+        <span>&nbsp;</span>
+        <a
+          routerLink="/termsOther/detail/{{ termNonEnglish._id }}"
+          class="btn btn-outline-secondary"
+          >Cancel</a
+        >
+      </form>
+    </dd>
+
+    <br />
+
+    <dt class="col-md-4">
+      Existing Definitions<br />(
+      {{ termNonEnglish.definitions.length }} )<br /><br />
+    </dt>
+    <dd class="col-md-8">
+      <div class="row row-cols-1">
+        <div class="col mb-4" *ngFor="let def of termNonEnglish.definitions">
+          <div class="card">
+            <div class="card-header">
+              <button class="btn btn-secondary btn-sm">
+                Like&nbsp;<span class="badge badge-light">{{ def.likes }}</span>
+              </button>
+              &nbsp; Author: {{ def.authorName }} on
+              {{ def.dateCreated }}
+            </div>
+            <div class="card-body">
+              {{ def.definition }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+    </dd>
+  </dl>
+  <hr />
+  <a routerLink="/home" class="btn btn-outline-primary">Back to Home</a>
+</div>

@@ -1,0 +1,21 @@
+<div class="dropdown">
+  <label for="search-box">
+    <span class="sr-only">Search</span>
+    <input
+      class="form-control"
+      type="search"
+      #searchBox
+      placeholder="Search..."
+      id="search-box"
+      (input)="search(searchBox.value)"
+    />
+  </label>
+
+  <ul class="dropdown-menu" [class.show]="searchBox.value" *ngIf="terms$">
+    <li class="dorpdown-item" *ngFor="let term of terms$ | async">
+      <a routerLink="/detail/{{ term._id }}">
+        {{ term.wordEnglish }}
+      </a>
+    </li>
+  </ul>
+</div>

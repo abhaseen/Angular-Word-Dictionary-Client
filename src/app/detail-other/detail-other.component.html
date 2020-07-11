@@ -1,0 +1,98 @@
+<div class="container" *ngIf="termNonEnglish && languages">
+  <h2>Non-English Term Details for {{ termNonEnglish.wordEnglish }}</h2>
+  <h3>({{ langName }} for {{ termNonEnglish.wordNonEnglish }} )</h3>
+  <dl class="row">
+    <dt class="col-md-4">
+      Definitions<br />( {{ termNonEnglish.definitions.length }} )<br /><br />
+      <a
+        class="btn btn-primary btn-sm"
+        routerLink="/termsOther/add-definition/{{ termNonEnglish._id }}"
+      >
+        Add another
+      </a>
+    </dt>
+    <dd class="col-md-8">
+      <div class="row row-cols-1">
+        <div class="col mb-4" *ngFor="let def of termNonEnglish.definitions">
+          <div class="card">
+            <div class="card-header">
+              <app-like-button
+                [likes]="def.likes"
+                [termId]="termNonEnglish._id"
+                [defId]="def._id"
+                [nonEnglish]="true"
+              ></app-like-button>
+              &nbsp; Author: {{ def.authorName }} on
+              {{ def.dateCreated }}
+            </div>
+            <div class="card-body">
+              {{ def.definition }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+    </dd>
+
+    <dt class="col-md-4">Field of study</dt>
+    <dd class="col-md-8">
+      <p>{{ termNonEnglish.fieldOfStudy }}</p>
+    </dd>
+
+    <dt class="col-md-4">Author name</dt>
+    <dd class="col-md-8">
+      <p>{{ termNonEnglish.authorName }}</p>
+    </dd>
+
+    <dt class="col-md-4">Dates</dt>
+    <dd class="col-md-8">
+      <p>Created {{ termNonEnglish.dateCreated }}</p>
+      <p>Revised {{ termNonEnglish.dateRevised }}</p>
+    </dd>
+
+    <br />
+
+    <dt class="col-md-4">Links</dt>
+    <dd class="col-md-8">
+      <span>
+        <a
+          class="btn btn-outline-primary btn-sm"
+          href="{{ termNonEnglish.linkAuthoritative }}"
+          [class.disabled]="!termNonEnglish.linkAuthoritative"
+        >
+          Authoritative
+        </a>
+      </span>
+      &nbsp;
+      <span>
+        <a
+          class="btn btn-outline-primary btn-sm"
+          href="{{ termNonEnglish.linkWikipedia }}"
+          [class.disabled]="!termNonEnglish.linkWikipedia"
+        >
+          Wikipedia
+        </a>
+      </span>
+      &nbsp;
+      <span>
+        <a
+          class="btn btn-outline-primary btn-sm"
+          href="{{ termNonEnglish.linkYouTube }}"
+          [class.disabled]="!termNonEnglish.linkYouTube"
+        >
+          YouTube
+        </a>
+      </span>
+    </dd>
+
+    <dt class="col-md-4">Was this helpful?</dt>
+    <dd class="col-md-8">
+      <app-helpful-buttons
+        [yesCount]="termNonEnglish.helpYes"
+        [noCount]="termNonEnglish.helpNo"
+        [termId]="termNonEnglish._id"
+        [nonEnglish]="true"
+      ></app-helpful-buttons>
+    </dd>
+  </dl>
+</div>
